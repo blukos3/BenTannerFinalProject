@@ -3,6 +3,7 @@ package com.example.finalproject;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,11 +20,11 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity {
     private static RequestQueue rq;
     public String client_id = "client_id=WDKMZ3KFJ0VWPLAIFYL0NR2AH5AY5TFAQBFH3VSJROVUFZSB";
-    public String client_secret = "client_secret=TQGOFEBU55OTQKXFECXND02IIW0WGTBC3G4NJERBYNXCJNSL";
+    public String client_secret = "client_secret=N3QIIRJ2VHXQW2LWP10WIZCSZVZF30CKV1E4TCAA5NCUYJQH";
     public String url = "https://api.foursquare.com/v2/venues/search";
-    public String query = "near=Champaign";
+    public String query = "near=";
     public JSONObject fullJson;
-    public String version = "v=20180628";
+    public String version = "v=20190429";
     public String addressOfPlace1;
     public String addressOfPlace2;
     public String addressOfPlace3;
@@ -37,10 +38,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        cityInput = (EditText) findViewById(R.id.cityInput);
-        submitButton = (Button) findViewById(R.id.button);
+        EditText userInput = findViewById(R.id.cityInput);
+        Button submitButton = findViewById(R.id.button);
         submitButton.setOnClickListener(v -> {
-            apiCall(query);
+            String input = userInput.getText().toString();
+            apiCall(query + input);
         });
     }
     public void apiCall(final String query) {
